@@ -2,7 +2,7 @@
 Nombre: Junior Moises Cayo Fulguera variante 4
 # 1 Actores:
 1. Administrador:<br>
-Gestionar usuarios, productos, categorías, proveedores, inventario y reportes.
+Gestionar usuarios, productos, proveedores, inventario y reportes.
 2. Vendedor:<br>
 Registrar las ventas, consultar productos y verificar stock.
 3. Proveedor:<br>

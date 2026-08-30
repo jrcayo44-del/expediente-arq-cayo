@@ -1,3 +1,3 @@
-# expediente-arq-cayo
-Nombre: Junior Moises Cayo Fulguera
-Variante: Comercio "Sistema de tienda con inventario"
+# h1 Sistema de tienda con inventario
+Nombre: Junior Moises Cayo Fulguera variante4
+1: Actores

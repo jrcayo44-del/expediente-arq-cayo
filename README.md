@@ -29,4 +29,5 @@ Responsabilidad: Registrar las compras realizadas a los proveedores y aumentar s
 8. Reportes:<br>
 Responsabilidad: Generar reportes de ventas, compras y existencias de productos.
 # 3 Diagrama de clases UML:
+![image alt](https://github.com/jrcayo44-del/expediente-arq-cayo/blob/d33c2e07e581d2c657538c201db0dae3d59ba852/DiagramaSisTienda.drawio.png)
 # 4 Atributos de calidad críticos:

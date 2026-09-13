@@ -1,26 +1,22 @@
 # Sistema de ventas con inventario con el patron BUILDER
 
-# 1. CATEGORIA
+from abc import ABC, abstractmethod
+
+
 class Categoria:
     def __init__(self, nombre):
         self.nombre = nombre
 
-
-# 2. PRODUCTO
 class Producto:
     def __init__(self, nombre, precio, categoria):
         self.nombre = nombre
         self.precio = precio
         self.categoria = categoria
 
-
-# 3. USUARIO
 class Usuario:
     def __init__(self, nombre):
         self.nombre = nombre
 
-
-# 4. DETALLE VENTA
 class DetalleVenta:
     def __init__(self, producto, cantidad):
         self.producto = producto
@@ -29,8 +25,6 @@ class DetalleVenta:
     def subtotal(self):
         return self.producto.precio * self.cantidad
 
-
-# 5. VENTA
 class Venta:
     def __init__(self):
         self.usuario = None
@@ -40,36 +34,58 @@ class Venta:
         return sum(d.subtotal() for d in self.detalles)
 
 
-# BUILDER
-class VentaBuilder:
+# INTERFAZ / CONTRATO 
+class IVentaBuilder(ABC):
+
+    @abstractmethod
+    def agregar_usuario(self, usuario):
+        pass
+
+    @abstractmethod
+    def agregar_producto(self, producto, cantidad):
+        pass
+
+    @abstractmethod
+    def construir(self):
+        pass
+
+
+# BUILDER 
+class VentaBuilder(IVentaBuilder):
 
     def __init__(self):
         self.venta = Venta()
 
-    def con_usuario(self, usuario):
+    def agregar_usuario(self, usuario):
         self.venta.usuario = usuario
         return self
 
     def agregar_producto(self, producto, cantidad):
-        self.venta.detalles.append(
-            DetalleVenta(producto, cantidad)
-        )
+        detalle = DetalleVenta(producto, cantidad)
+        self.venta.detalles.append(detalle)
         return self
 
     def construir(self):
         return self.venta
-    
 
-categoria = Categoria("Zapatos")
-producto = Producto("Zapato artesanal", 150, categoria)
+
+categoria = Categoria("Calzados")
+
+producto = Producto(
+    "Zapato artesanal",
+    150,
+    categoria
+)
+
 usuario = Usuario("Juan")
 
 venta = (
     VentaBuilder()
-    .con_usuario(usuario)
+    .agregar_usuario(usuario)
     .agregar_producto(producto, 2)
     .construir()
 )
 
 print("Cliente:", venta.usuario.nombre)
+print("Producto:", producto.nombre)
 print("Total: Bs.", venta.total())

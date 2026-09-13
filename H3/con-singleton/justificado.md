@@ -1,0 +1,2 @@
+En el caso de mis clases Usuario, cliente, Producto, Venta, Categoría, Proveedor, detalleVenta, detalleCompra, no aplicaría singleton porque necesitaría crear múltiples objetos. Si aplicaría Singleton, solo existiría una única instancia de la clase durante la ejecución del sistema. Eso causaría problemas porque los datos de una venta podrían sobrescribir los de otra.
+<img width="1841" height="733" alt="DiagramaSisTienda-conSOLID drawio" src="https://github.com/user-attachments/assets/bae93e69-fd08-4ce5-ba32-c8d43a3f2dc3" />

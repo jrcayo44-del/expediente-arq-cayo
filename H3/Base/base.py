@@ -142,8 +142,8 @@ producto.mostrar_informacion()
 # Crear usuario
 usuario = Usuario(
     1,
-    "Junior Moises Cayo Fulguera",
-    "jrMoises",
+    "Juan Garcia",
+    "Juan",
     "123456",
     "Activo"
 )

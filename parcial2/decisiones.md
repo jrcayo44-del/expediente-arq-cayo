@@ -6,4 +6,7 @@ En esta situacion estoy usando el patrón Strategy porque existen diferentes for
 No estoy usando Observer porque no es nesesario notificar a varios módulos, ni Factory porque el problema no es crear objetos, sino cambiar dinámicamente la forma de calcular el precio.<br>
 - Situacion 3 patron Adapter <br>
 Y en esta situacion estoy usando el patrón Adapter porque el SDK de la pasarela de pago utiliza una interfaz distinta a la de mi sistema de gimnasio,los métodos en inglés, montos en centavos y datos que el dominio no debería manejar directamente. El Adapter me permite traducir esa comunicación y mantener el sistema independiente del proveedor externo. <br>
-Tambien no estoy usando Strategy porque no estoy cambiando un algoritmo de pago, ni tampoco Observer porque no necesito notificar eventos, sino necesito adaptar una interfaz externa a la interfaz de mi sistema de gimnasio.
+Tambien no estoy usando Strategy porque no estoy cambiando un algoritmo de pago, ni tampoco Observer porque no necesito notificar eventos, sino necesito adaptar una interfaz externa a la interfaz de mi sistema de gimnasio.<br>
+
+-Principio SOLID<br>
+Mi coneccion SOLID es de Abierto/Cerrado (Open/Closed), para usar el contrato ObservadorMembresia y  esta en la línea 8 observador.actualizar(socio), porque ModuloSocios no depende de una clase específica, entonces puedo agregar nuevos observadores, como promociones o correo, sin modificar el código principal del módulo de socios.

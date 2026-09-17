@@ -55,9 +55,6 @@ class ConEmpaqueEspecial(ProductoDecorator):
     def obtener_precio(self):
         return self.producto.obtener_precio() + 20
 
-
-print("========== TIENDA - SISTEMA DE INVENTARIO ==========\n")
-
 producto = ProductoBase("Teclado Gamer", 250)
 
 
@@ -69,7 +66,6 @@ producto1 = ConGarantia(producto)
 print("COMBINACIÓN 1")
 print("Producto:", producto1.obtener_descripcion())
 print("Precio: Bs.", producto1.obtener_precio())
-
 
 print("\n----------------------------------------\n")
 

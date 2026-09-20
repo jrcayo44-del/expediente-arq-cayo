@@ -1,6 +1,9 @@
 # C4 del caso sistema de tienda con inventario
 
-# Nivel 1 (el sistema y su mundo)
+# Nivel 1 - Contexto (el sistema y su mundo) <br>
+¿quién usa el sistema y con qué otros sistemas habla?
+- Principalmente lo usan el vendedor, para registrar las ventas y cobrar a los clientes; el administrador, para gestionar productos, usuarios y reportes; y el encargado de inventario, para controlar las existencias, entradas, salidas y niveles de stock.<br>
+- El sistema se comunica con una pasarela de pagos para procesar pagos electrónicos, con un sistema del proveedor para apoyar la reposición de productos, y con un servicio de notificaciones para enviar avisos por WhatsApp.
 ```mermaid
 flowchart TB
     vendedor["👤 Vendedor<br>(registra ventas, consultar productos y verificar stock)"]
@@ -16,5 +19,34 @@ registra compra,registra venta,controla stock,genera reportes"]
     administrador -->|"Gestionar reportes y stock"| sistema
     sistema -->|"envía comprobantes y avisos"| notificacion
     sistema -->|"cobra en línea"| pasarela
-    sistema -->|"envia orden de la compra"| proveedor
+    proveedor -->|"realiza reposición de productos"| sistema
+```
+
+# Nivel 2 — Contenedores (el zoom adentro del sistema) <br>
+¿de qué piezas ejecutables/almacenes está hecho el sistema?
+- Las piezas ejecutables son la Aplicación Web, que interactúa con el sistema; la Lógica de Negocio; el Servicio de Avisos, que genera notificaciones y una base de datos MySQL.
+
+```mermaid
+flowchart TB
+    vendedor["👤 Vendedor"]
+    administrador["🧑‍💼 Administrador"]
+    encargado["👤 Encargado de inventario"]
+    subgraph sistema["🏪 SISTEMA DE TIENDA CON INVENTARIO"]
+        webapp["🌐 Aplicación web<br>Python / Django<br>Pantallas de venta, stock y reportes"]
+        api["⚙️ Lógica de negocio<br>Python<br>Ventas, descuentos, inventario, pagos<br>Factory:Elige el descuento y método de pago"]
+        bd[("🗄️ Base de datos<br>MySQL<br>Productos, ventas, movimientos, usuarios, proveedores")]
+        avisos["🛎️ Servicio de avisos<br>Python<br>Observer: publica stock-bajo<br>a los suscriptores"]
+    end
+    correo["🔔 Servicio de notificaciones (externo)"]
+    pasarela["💳 Pasarela de pagos (externo)"]
+    proveedor["🚚 sistema del proveedor (externo)"]
+    vendedor --> webapp
+    administrador --> webapp
+    encargado --> webapp
+    webapp --> api
+    api --> |"cobra por el método de pago elegido"| pasarela
+    api --> bd
+    proveedor --> |"realiza la reposición"| api
+    api -->|"publica evento stock-bajo"| avisos
+    avisos --> correo
 ```
